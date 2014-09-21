@@ -16,17 +16,18 @@ Data is read, cleaned, and transformed step by step according to the following i
 
 To explain this in detail:
 
-1. Merges the training and the test sets to create one data set.
-1.1 Training data set are read from 3 files in "UCI HAR Dataset/train" depository:  "X_train.txt", "subject_train.txt",  "y_train.txt" 
+# Merges the training and the test sets to create one data set.
+
+step1: Training data set are read from 3 files in "UCI HAR Dataset/train" depository:  "X_train.txt", "subject_train.txt",  "y_train.txt" 
 data for all the measurement for 561 features (variables) are from "X_train.txt"        
 data about subjects who performed the training are from "subject_train.txt" 
 data about the activites code are from "y_train.txt" 
 
-1.2 These 3 datas are combined together by cbind() command, which leads to complete training data set.
+step2: These 3 datas are combined together by cbind() command, which leads to complete training data set.
 
-1.3 Complete test data set was obtained by the same way from the "UCI HAR Dataset/test" depository.
+step3: Complete test data set was obtained by the same way from the "UCI HAR Dataset/test" depository.
 
-1.4 traing data set and test data set are merged by rbind() command, which is saved in "TrainTestData" data frame.
+step4: traing data set and test data set are merged by rbind() command, which is saved in "TrainTestData" data frame.
 
 The scripts for 1st step as following:
 ```{r}
@@ -59,10 +60,11 @@ TrainTestData<-rbind(var561TrainData,var561TestData)
 ```
 
 
-2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-2.1 The whole list for feature names are read from "features.txt" in "UCI HAR Dataset" depository.
-2.2 Using partial match function grep() to filter the feature names containing "mean" or "std".
-2.3 Using the indext extracted in 2.2 to subset the measurements only for mean or std, together with Activity and Subject information (1st and 2nd columns).
+# Extracts only the measurements on the mean and standard deviation for each measurement. 
+
+step1: The whole list for feature names are read from "features.txt" in "UCI HAR Dataset" depository.
+step2: Using partial match function grep() to filter the feature names containing "mean" or "std".
+step3: Using the indext extracted in 2.2 to subset the measurements only for mean or std, together with Activity and Subject information (1st and 2nd columns).
 
 The scripts for 2nd step as following:
 ```{r}
@@ -73,9 +75,9 @@ MeanStdIndex<-grep("mean|std", var561header$V2)
 MeanStdTrainTestData<-TrainTestData[,c(1:2,MeanStdIndex+2)]
 ```
 
-3. Uses descriptive activity names to name the activities in the data set.
-3.1 descriptive activity names are read from " activity_labels.txt" in "UCI HAR Dataset" depository. 
-3.2 use activitiy names to replace the number code in the "Activity" columne of the data set.
+# Uses descriptive activity names to name the activities in the data set.
+step1: descriptive activity names are read from " activity_labels.txt" in "UCI HAR Dataset" depository. 
+step2: use activitiy names to replace the number code in the "Activity" columne of the data set.
 
 The scripts for 3rd step as following:
 ```{r}
@@ -92,7 +94,7 @@ MeanStdTrainTestData$Activity[MeanStdTrainTestData$Activity==6] <- activityName$
 ```
 
 
-4. Appropriately labels the data set with descriptive variable names. 
+# Appropriately labels the data set with descriptive variable names. 
 
 feature (variable) names only for "mean" and "std" are added into data set as column names.
 
@@ -102,7 +104,7 @@ MeanStdHeader<-as.character(var561header$V2[MeanStdIndex])
 colnames(MeanStdTrainTestData)[3:81]<-MeanStdHeader
 ```
 
-5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+# From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 use data.table to subset the data set by "Subject" first, then "Activity", then calculate mean for each feature (variable). Before this, convert the data set as data.table and save in "MeanStdTrainTestDataDT". The data for average is saved in a new data set named "MeanByGroup".
 
