@@ -10,14 +10,14 @@ This is an R Markdown document: CodeBook for decribing the variables, the data a
 # Read all measurements of 561 features from X_train. These measurements are saved in  "var561TrianData".
 
 ```{r}
-var561TrainPath<-"./Rdata/UCI HAR Dataset/train/X_train.txt"
+var561TrainPath<-"./UCI HAR Dataset/train/X_train.txt"
 var561TrainData<-read.table(var561TrainPath,sep="", header=F)
 ```
 
 # Read Subject information from subject_train.txt. This information is saved in "SubjectTrain". Add data from "SubjectTrain" into "var561TrainData" by cbind() command.
 
 ```{r}
-SubjectTrainPath<-"./Rdata/UCI HAR Dataset/train/subject_train.txt"
+SubjectTrainPath<-"./UCI HAR Dataset/train/subject_train.txt"
 SubjectTrain<-read.table(SubjectTrainPath, sep="", header=F)
 var561TrainData<-cbind(SubjectTrain$V1,var561TrainData)
 ```
@@ -25,7 +25,7 @@ var561TrainData<-cbind(SubjectTrain$V1,var561TrainData)
 # Read Activity information from y_train.txt. This information is saved in "activityTrainData". Add the data from "activityTrainData" into "var561TrainData" by cbind() command.
 
 ```{r}
-activityTrainPath<-"./Rdata/UCI HAR Dataset/train/y_train.txt"
+activityTrainPath<-"./UCI HAR Dataset/train/y_train.txt"
 activityTrainData<-read.table(activityTrainPath, sep="", header=F)
 var561TrainData<-cbind(activityTrainData$V1, var561TrainData)
 ```
@@ -33,14 +33,14 @@ var561TrainData<-cbind(activityTrainData$V1, var561TrainData)
 # Read all measurements of 561 variables from X_test. These measurements are saved in "var561TestData".
 
 ```{r}
-var561TestPath<-"./Rdata/UCI HAR Dataset/test/X_test.txt"
+var561TestPath<-"./UCI HAR Dataset/test/X_test.txt"
 var561TestData<-read.table(var561TestPath,sep="", header=F)
 ```
 
 # Read Subject information from subject_test.txt. This information is saved in "SubjectTest". Add data from "SubjectTest" into "var561TestData" by cbind() command.
 
 ```{r}
-SubjectTestPath<-"./Rdata/UCI HAR Dataset/test/subject_test.txt"
+SubjectTestPath<-"./UCI HAR Dataset/test/subject_test.txt"
 SubjectTest<-read.table(SubjectTestPath, sep="", header=F)
 var561TestData<-cbind(SubjectTest$V1,var561TestData)
 ```
@@ -48,7 +48,7 @@ var561TestData<-cbind(SubjectTest$V1,var561TestData)
 # Read Activity information from y_test.txt. This information is saved in "activityTestData". Add data from "activityTestData" into "var561TestData" by cbind() command.
 
 ```{r}
-activityTestPath<-"./Rdata/UCI HAR Dataset/test/y_test.txt"
+activityTestPath<-"./UCI HAR Dataset/test/y_test.txt"
 activityTestData<-read.table(activityTestPath, sep="", header=F)
 var561TestData<-cbind(activityTestData$V1, var561TestData)
 ```
@@ -65,7 +65,7 @@ TrainTestData<-rbind(var561TrainData,var561TestData)
 # Read the list of all feature names from features.txt. This information is saved in "var561header".
 
 ```{r}
-var561headerPath<-"./Rdata/UCI HAR Dataset/features.txt"
+var561headerPath<-"./UCI HAR Dataset/features.txt"
 var561header<-read.table(var561headerPath, sep="",header=F)
 ```
 
@@ -79,7 +79,7 @@ MeanStdTrainTestData<-TrainTestData[,c(1:2,MeanStdIndex+2)]
 
 # Read the decriptive activity names from activity_labels.txt. The information is saved in "activityName". Convert the class into character. 
 ```{r}
-activityNamePath<-"./Rdata/UCI HAR Dataset/activity_labels.txt"
+activityNamePath<-"./UCI HAR Dataset/activity_labels.txt"
 activityName<-read.table(activityNamePath, sep="", header=F)
 activityName$V2<-as.character(activityName$V2)
 ```
