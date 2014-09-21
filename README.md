@@ -31,25 +31,25 @@ step4: traing data set and test data set are merged by rbind() command, which is
 
 The scripts for this part as following:
 ```{r}
-var561TrainPath<-"./Rdata/UCI HAR Dataset/train/X_train.txt"
+var561TrainPath<-"./UCI HAR Dataset/train/X_train.txt"
 var561TrainData<-read.table(var561TrainPath,sep="", header=F)
 
-SubjectTrainPath<-"./Rdata/UCI HAR Dataset/train/subject_train.txt"
+SubjectTrainPath<-"./UCI HAR Dataset/train/subject_train.txt"
 SubjectTrain<-read.table(SubjectTrainPath, sep="", header=F)
 var561TrainData<-cbind(SubjectTrain$V1,var561TrainData)
 
-activityTrainPath<-"./Rdata/UCI HAR Dataset/train/y_train.txt"
+activityTrainPath<-"./UCI HAR Dataset/train/y_train.txt"
 activityTrainData<-read.table(activityTrainPath, sep="", header=F)
 var561TrainData<-cbind(activityTrainData$V1, var561TrainData)
 
-var561TestPath<-"./Rdata/UCI HAR Dataset/test/X_test.txt"
+var561TestPath<-"./UCI HAR Dataset/test/X_test.txt"
 var561TestData<-read.table(var561TestPath,sep="", header=F)
 
-SubjectTestPath<-"./Rdata/UCI HAR Dataset/test/subject_test.txt"
+SubjectTestPath<-"./UCI HAR Dataset/test/subject_test.txt"
 SubjectTest<-read.table(SubjectTestPath, sep="", header=F)
 var561TestData<-cbind(SubjectTest$V1,var561TestData)
 
-activityTestPath<-"./Rdata/UCI HAR Dataset/test/y_test.txt"
+activityTestPath<-"./UCI HAR Dataset/test/y_test.txt"
 activityTestData<-read.table(activityTestPath, sep="", header=F)
 var561TestData<-cbind(activityTestData$V1, var561TestData)
 
@@ -70,7 +70,7 @@ step3: Using the indext extracted in step2 to subset the measurements only for m
 
 The scripts for this part as following:
 ```{r}
-var561headerPath<-"./Rdata/UCI HAR Dataset/features.txt"
+var561headerPath<-"./UCI HAR Dataset/features.txt"
 var561header<-read.table(var561headerPath, sep="",header=F)
 
 MeanStdIndex<-grep("mean|std", var561header$V2)
@@ -85,7 +85,7 @@ step2: use activitiy names to replace the number code in the "Activity" columne 
 
 The scripts for this part as following:
 ```{r}
-activityNamePath<-"./Rdata/UCI HAR Dataset/activity_labels.txt"
+activityNamePath<-"./UCI HAR Dataset/activity_labels.txt"
 activityName<-read.table(activityNamePath, sep="", header=F)
 activityName$V2<-as.character(activityName$V2)
 
