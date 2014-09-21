@@ -63,8 +63,10 @@ TrainTestData<-rbind(var561TrainData,var561TestData)
 # Extracts only the measurements on the mean and standard deviation for each measurement. 
 
 step1: The whole list for feature names are read from "features.txt" in "UCI HAR Dataset" depository.
+
 step2: Using partial match function grep() to filter the feature names containing "mean" or "std".
-step3: Using the indext extracted in 2.2 to subset the measurements only for mean or std, together with Activity and Subject information (1st and 2nd columns).
+
+step3: Using the indext extracted in step2 to subset the measurements only for mean or std, together with Activity and Subject information (1st and 2nd columns).
 
 The scripts for 2nd step as following:
 ```{r}
@@ -76,7 +78,9 @@ MeanStdTrainTestData<-TrainTestData[,c(1:2,MeanStdIndex+2)]
 ```
 
 # Uses descriptive activity names to name the activities in the data set.
+
 step1: descriptive activity names are read from " activity_labels.txt" in "UCI HAR Dataset" depository. 
+
 step2: use activitiy names to replace the number code in the "Activity" columne of the data set.
 
 The scripts for 3rd step as following:
