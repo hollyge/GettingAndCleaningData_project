@@ -29,7 +29,7 @@ step3: Complete test data set was obtained by the same way from the "UCI HAR Dat
 
 step4: traing data set and test data set are merged by rbind() command, which is saved in "TrainTestData" data frame.
 
-The scripts for 1st step as following:
+The scripts for this part as following:
 ```{r}
 var561TrainPath<-"./Rdata/UCI HAR Dataset/train/X_train.txt"
 var561TrainData<-read.table(var561TrainPath,sep="", header=F)
@@ -68,7 +68,7 @@ step2: Using partial match function grep() to filter the feature names containin
 
 step3: Using the indext extracted in step2 to subset the measurements only for mean or std, together with Activity and Subject information (1st and 2nd columns).
 
-The scripts for 2nd step as following:
+The scripts for this part as following:
 ```{r}
 var561headerPath<-"./Rdata/UCI HAR Dataset/features.txt"
 var561header<-read.table(var561headerPath, sep="",header=F)
@@ -83,7 +83,7 @@ step1: descriptive activity names are read from " activity_labels.txt" in "UCI H
 
 step2: use activitiy names to replace the number code in the "Activity" columne of the data set.
 
-The scripts for 3rd step as following:
+The scripts for this part as following:
 ```{r}
 activityNamePath<-"./Rdata/UCI HAR Dataset/activity_labels.txt"
 activityName<-read.table(activityNamePath, sep="", header=F)
@@ -102,7 +102,7 @@ MeanStdTrainTestData$Activity[MeanStdTrainTestData$Activity==6] <- activityName$
 
 feature (variable) names only for "mean" and "std" are added into data set as column names.
 
-the scripts for the 4th step as following:
+the scripts for this part as following:
 ```{r}
 MeanStdHeader<-as.character(var561header$V2[MeanStdIndex])
 colnames(MeanStdTrainTestData)[3:81]<-MeanStdHeader
@@ -112,7 +112,7 @@ colnames(MeanStdTrainTestData)[3:81]<-MeanStdHeader
 
 use data.table to subset the data set by "Subject" first, then "Activity", then calculate mean for each feature (variable). Before this, convert the data set as data.table and save in "MeanStdTrainTestDataDT". The data for average is saved in a new data set named "MeanByGroup".
 
-the scripts fro the 5th step as following:
+the scripts fro this part as following:
 ```{r}
 MeanStdTrainTestDataDT<-data.table(MeanStdTrainTestData)
 MeanByGroup<-MeanStdTrainTestDataDT[,lapply(.SD,mean),by=list(Subject, Activity)] 
